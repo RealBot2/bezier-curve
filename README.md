@@ -12,4 +12,4 @@ simple program that draws bezier curve (up to 4 points, quadratic bezier curve).
 ## Requirements
 pygame modules
 
-you can install it with  ** *pip install pygame* **
+you can install it with  **_pip install pygame_**
