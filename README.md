@@ -7,6 +7,7 @@
 simple program that draws bezier curve (up to 4 points, quadratic bezier curve).
 
 add point - click with left mouse button on the background
+
 move point - click and drag point with left mouse button
 
 ## Requirements
