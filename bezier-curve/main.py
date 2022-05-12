@@ -1,37 +1,30 @@
 import sys
 import pygame as pg
-import copy
-import math
 
 from Point import Point
 from Bezier import Bezier
 
 
+window_size = (1280, 720)
+background_color = (0, 0, 0)
+target_fps = 60
+
+
+#### SETUP ####
 pg.init()
-window = pg.display.set_mode((1280, 720))
+window = pg.display.set_mode(window_size)
 clock = pg.time.Clock()
 
+button_is_clicked = False
+button_is_pressed = False
 
-########################################################
-#setup() runs only once when program begins
-def setup():
-    global button_is_clicked
-    global button_is_pressed
-    button_is_clicked = False
-    button_is_pressed = False
+red = (255, 0, 0)
+green = (0, 255, 0)
 
-    global red
-    global green
-    red = (255, 0, 0)
-    green = (0, 255, 0)
-
-    global bezier
-    global mouse_point
-    bezier = Bezier(window)
-    mouse_point = Point(pg.mouse.get_pos())
+bezier = Bezier(window)
+mouse_point = Point(pg.mouse.get_pos())
 
 
-#loop() runs in loop until program ends
 def loop():
     global button_is_clicked
     global button_is_pressed
@@ -49,15 +42,14 @@ def loop():
     
     bezier.draw()
 
-########################################################
 
-
-#runs in at begining of loop
 def doOnBeginningOfLoop():
     global mouse_point
     mouse_point.position = pg.mouse.get_pos()
     global button_is_clicked
     button_is_clicked = False
+
+    window.fill(background_color)
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -66,14 +58,12 @@ def doOnBeginningOfLoop():
         if event.type == pg.MOUSEBUTTONDOWN:
             button_is_clicked = pg.mouse.get_pressed()[0]
 
-#runs in at end of loop
+
 def doOnEndOfLoop():
     pg.display.update()
-    clock.tick(60)
-    window.fill((0, 0, 0))
+    clock.tick(target_fps)
 
 
-setup()
 while True:
     doOnBeginningOfLoop()
     loop()
